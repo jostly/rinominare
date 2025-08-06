@@ -1,0 +1,8 @@
+[package]
+name = "rinominare"
+version = "1.0.0"
+edition = "2024"
+
+[dependencies]
+nom-exif = "2.5.4"
+thiserror = "2.0.12"
