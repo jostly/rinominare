@@ -25,7 +25,7 @@ fn do_work(target_dir: &str, silent: bool) -> Result<(), RinominareError> {
     let mut parser = ImageParser::new();
 
     if !silent {
-        println!("Checking files in {}", target_dir);
+        println!("Controllo i file in {}", target_dir);
     }
     let paths = std::fs::read_dir(target_dir)?;
 
@@ -45,13 +45,13 @@ fn do_work(target_dir: &str, silent: bool) -> Result<(), RinominareError> {
             Ok(Some(x)) => x,
             Ok(None) => {
                 if !silent {
-                    println!("Skipping {} because it has no EXIF data", f);
+                    println!("Salto {} perché manca EXIF data", f);
                 }
                 continue;
             }
             Err(RinominareError::ExifError(nom_exif::Error::UnrecognizedFileFormat)) => {
                 if !silent {
-                    println!("Skipping {} because it is an unrecognized file format", f);
+                    println!("Salto {} perché non conosco il formato del file", f);
                 }
                 continue;
             }
@@ -63,7 +63,7 @@ fn do_work(target_dir: &str, silent: bool) -> Result<(), RinominareError> {
 
         if f.starts_with(&prepend_string) {
             if !silent {
-                println!("Skipping {} because it has the correct prepend string", f);
+                println!("Salto {} perché ha giá il nome corretto", f);
             }
             continue;
         }
@@ -75,7 +75,7 @@ fn do_work(target_dir: &str, silent: bool) -> Result<(), RinominareError> {
         target_path.push(prepend_string);
 
         if !silent {
-            println!("Renaming {} to {}", path.display(), target_path.display());
+            println!("Rinomino {} come {}", path.display(), target_path.display());
         }
         std::fs::rename(&path, &target_path)?;
     }
